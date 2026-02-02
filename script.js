@@ -204,5 +204,301 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.animate-on-scroll').forEach(element => {
     animateOnScroll.observe(element);
   });
+
+  // Initialize fade-in animations
+  document.querySelectorAll('.animate-fade-in').forEach(element => {
+    animateOnScroll.observe(element);
+  });
+
+  // Initialize scale-up animations
+  document.querySelectorAll('.animate-scale-up').forEach(element => {
+    animateOnScroll.observe(element);
+  });
+
+  // Strategic Focus Slider Functionality
+  let currentSlide = 0;
+  const totalSlides = 5;
+  let cardsPerView = 3;
+  
+  function updateCardsPerView() {
+    if (window.innerWidth <= 480) {
+      cardsPerView = 1;
+    } else if (window.innerWidth <= 768) {
+      cardsPerView = 2;
+    } else {
+      cardsPerView = 3;
+    }
+  }
+  
+  function createDots() {
+    const dotsContainer = document.getElementById('sliderDots');
+    if (!dotsContainer) return;
+    
+    dotsContainer.innerHTML = '';
+    const maxSlide = Math.ceil(totalSlides / cardsPerView) - 1;
+    
+    for (let i = 0; i <= maxSlide; i++) {
+      const dot = document.createElement('button');
+      dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
+      dot.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(dot);
+    }
+  }
+  
+  function updateSliderPosition() {
+    const track = document.getElementById('objectivesTrack');
+    if (!track) return;
+    
+    const cardWidth = 100 / cardsPerView;
+    const translateX = -(currentSlide * cardWidth);
+    track.style.transform = `translateX(${translateX}%)`;
+    
+    // Update dots
+    const dots = document.querySelectorAll('.slider-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Update button states
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const maxSlide = Math.ceil(totalSlides / cardsPerView) - 1;
+    
+    if (prevBtn) prevBtn.disabled = currentSlide === 0;
+    if (nextBtn) nextBtn.disabled = currentSlide >= maxSlide;
+  }
+  
+  window.moveSlider = function(direction) {
+    const maxSlide = Math.ceil(totalSlides / cardsPerView) - 1;
+    
+    if (direction === 1 && currentSlide < maxSlide) {
+      currentSlide++;
+    } else if (direction === -1 && currentSlide > 0) {
+      currentSlide--;
+    }
+    
+    updateSliderPosition();
+  }
+  
+  window.goToSlide = function(slideIndex) {
+    const maxSlide = Math.ceil(totalSlides / cardsPerView) - 1;
+    currentSlide = Math.min(slideIndex, maxSlide);
+    updateSliderPosition();
+  }
+  
+  function initializeSlider() {
+    updateCardsPerView();
+    createDots();
+    updateSliderPosition();
+  }
+  
+  // Initialize slider if elements exist
+  if (document.getElementById('objectivesSlider')) {
+    initializeSlider();
+  }
+  
+  // Reinitialize on window resize
+  window.addEventListener('resize', () => {
+    if (document.getElementById('objectivesSlider')) {
+      updateCardsPerView();
+      currentSlide = 0; // Reset to first slide on resize
+      createDots();
+      updateSliderPosition();
+    }
+  });
+  
+  // Team Members Toggle Functionality
+  window.toggleAdditionalTeamMembers = function() {
+    const additionalMembers = document.querySelectorAll('.additional-team-member');
+    const viewMoreBtn = document.getElementById('teamViewMoreBtn');
+    
+    if (!additionalMembers.length || !viewMoreBtn) return;
+    
+    const isVisible = additionalMembers[0].style.display !== 'none';
+    
+    if (isVisible) {
+      // Hide additional members
+      additionalMembers.forEach(member => {
+        member.style.display = 'none';
+      });
+      viewMoreBtn.textContent = 'View More Team Members';
+    } else {
+      // Show additional members with animation
+      additionalMembers.forEach((member, index) => {
+        member.style.display = 'flex';
+        // Trigger animation
+        setTimeout(() => {
+          member.classList.add('animate-in');
+        }, index * 100);
+      });
+      viewMoreBtn.textContent = 'View Less';
+    }
+  }
+  
+  // Member Description Toggle Functionality
+  window.toggleDescription = function(memberName) {
+    const preview = document.querySelector(`#desc-${memberName} .description-preview`);
+    const full = document.querySelector(`#desc-${memberName} .description-full`);
+    
+    if (!preview || !full) return;
+    
+    if (preview.style.display !== 'none') {
+      // Show full description
+      preview.style.display = 'none';
+      full.style.display = 'inline';
+    } else {
+      // Show preview description
+      preview.style.display = 'inline';
+      full.style.display = 'none';
+    }
+  }
+
+  // Awards Slider Functionality
+  let currentAwardSlide = 0;
+  const totalAwards = 11;
+  let awardsPerView = 3;
+  let awardsAutoPlay;
+  
+  function updateAwardsPerView() {
+    if (window.innerWidth <= 480) {
+      awardsPerView = 1;
+    } else if (window.innerWidth <= 768) {
+      awardsPerView = 1.5;
+    } else if (window.innerWidth <= 1024) {
+      awardsPerView = 2;
+    } else {
+      awardsPerView = 3;
+    }
+  }
+  
+  function createAwardsDots() {
+    const dotsContainer = document.getElementById('awardsDots');
+    if (!dotsContainer) return;
+    
+    dotsContainer.innerHTML = '';
+    const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
+    
+    for (let i = 0; i < maxSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = `award-dot ${i === 0 ? 'active' : ''}`;
+      dot.onclick = () => goToAwardSlide(i);
+      dot.setAttribute('aria-label', `Go to award slide ${i + 1}`);
+      dotsContainer.appendChild(dot);
+    }
+  }
+  
+  function updateAwardsPosition() {
+    const track = document.getElementById('awardsTrack');
+    if (!track) return;
+    
+    const slideWidth = 320; // slide width (300px) + gap (20px)
+    const translateX = -(currentAwardSlide * slideWidth * Math.floor(awardsPerView));
+    track.style.transform = `translateX(${translateX}px)`;
+    
+    // Update dots
+    const dots = document.querySelectorAll('.award-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentAwardSlide);
+    });
+    
+    // Update navigation buttons
+    const prevBtn = document.querySelector('.awards-prev');
+    const nextBtn = document.querySelector('.awards-next');
+    const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
+    
+    if (prevBtn) prevBtn.disabled = currentAwardSlide === 0;
+    if (nextBtn) nextBtn.disabled = currentAwardSlide >= maxSlides - 1;
+    
+    // Animate visible slides
+    const slides = document.querySelectorAll('.award-slide');
+    slides.forEach((slide, index) => {
+      const startIndex = currentAwardSlide * Math.floor(awardsPerView);
+      const endIndex = startIndex + Math.floor(awardsPerView);
+      
+      if (index >= startIndex && index < endIndex) {
+        setTimeout(() => {
+          slide.style.animation = 'slideInFromRight 0.6s ease-out forwards';
+        }, (index - startIndex) * 150);
+      }
+    });
+  }
+  
+  window.moveAwardsSlider = function(direction) {
+    const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
+    
+    if (direction === 1 && currentAwardSlide < maxSlides - 1) {
+      currentAwardSlide++;
+    } else if (direction === -1 && currentAwardSlide > 0) {
+      currentAwardSlide--;
+    }
+    
+    updateAwardsPosition();
+  }
+  
+  window.goToAwardSlide = function(slideIndex) {
+    const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
+    currentAwardSlide = Math.min(slideIndex, maxSlides - 1);
+    updateAwardsPosition();
+  }
+  
+  function initializeAwardsSlider() {
+    updateAwardsPerView();
+    createAwardsDots();
+    updateAwardsPosition();
+    
+    // Initial animation for visible slides
+    const slides = document.querySelectorAll('.award-slide');
+    slides.forEach((slide, index) => {
+      if (index < Math.floor(awardsPerView)) {
+        setTimeout(() => {
+          slide.classList.add('animate-in');
+        }, index * 200);
+      }
+    });
+  }
+  
+  // Initialize awards slider if elements exist
+  if (document.getElementById('awardsTrack')) {
+    setTimeout(initializeAwardsSlider, 200);
+    
+    // Reinitialize on window resize
+    window.addEventListener('resize', () => {
+      updateAwardsPerView();
+      currentAwardSlide = 0;
+      createAwardsDots();
+      updateAwardsPosition();
+    });
+
+    // Auto-play functionality
+    awardsAutoPlay = setInterval(() => {
+      const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
+      if (currentAwardSlide < maxSlides - 1) {
+        window.moveAwardsSlider(1);
+      } else {
+        currentAwardSlide = 0;
+        updateAwardsPosition();
+      }
+    }, 6000);
+
+    // Pause auto-play on hover
+    const awardsSection = document.querySelector('.awards-section');
+    if (awardsSection) {
+      awardsSection.addEventListener('mouseenter', () => {
+        clearInterval(awardsAutoPlay);
+      });
+      
+      awardsSection.addEventListener('mouseleave', () => {
+        awardsAutoPlay = setInterval(() => {
+          const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
+          if (currentAwardSlide < maxSlides - 1) {
+            window.moveAwardsSlider(1);
+          } else {
+            currentAwardSlide = 0;
+            updateAwardsPosition();
+          }
+        }, 6000);
+      });
+    }
+  }
 });
 
