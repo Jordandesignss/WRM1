@@ -88,7 +88,7 @@ html{
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #cccccc; /* Fallback color */
+  background-color: #4C2D48; /* Fallback color */
 }
 
 .hero-video {
@@ -104,15 +104,14 @@ html{
   object-fit: cover;
 }
 
-/* Hide video and show poster image for reduced motion users */
+/* Hide video and show solid background for reduced motion users */
 @media (prefers-reduced-motion: reduce) {
   .hero-video {
     display: none;
   }
   .hero {
-    background-image: url("images/Hero.png");
-    background-size: cover;
-    background-position: center;
+    background-color: #4C2D48;
+    background-image: none;
   }
 }
 
@@ -122,9 +121,8 @@ html{
     display: none;
   }
   .hero {
-    background-image: url("images/Hero.png");
-    background-size: cover;
-    background-position: center;
+    background-color: #4C2D48;
+    background-image: none;
   }
 }
 
@@ -2504,34 +2502,35 @@ margin-top: -10px;
 
   /* Slider responsive - Mobile */
   .objective-card {
-    flex: 0 0 100%;
+    flex: 0 0 calc(100% - 1rem);
     min-height: 240px;
     padding: 1.5rem;
   }
 
   .slider-container {
-    margin: 0 -1rem;
+    margin: 0 -0.5rem;
+    overflow: hidden;
   }
 
   .objectives-slider {
     margin: 0 0.5rem;
-  }
-
-  .slider-btn {
-    width: 40px;
-    height: 40px;
-  }
-
-  .slider-btn span {
-    font-size: 1.2rem;
+    overflow: hidden;
   }
 
   .objectives-track {
     gap: 1rem;
   }
 
-  .objective-card {
-    padding: 1.5rem;
+  .slider-btn {
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    flex-shrink: 0;
+    display: none;
+  }
+
+  .slider-btn span {
+    font-size: 1.2rem;
   }
 
   .impact-highlights {
@@ -2870,6 +2869,7 @@ margin-top: -10px;
     z-index: 15;
     width: 50px;
     height: 50px;
+    display: none;
   }
   
   .awards-prev {

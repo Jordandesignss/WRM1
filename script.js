@@ -306,6 +306,48 @@ document.addEventListener('DOMContentLoaded', () => {
       updateSliderPosition();
     }
   });
+
+  // Touch/Swipe functionality for objectives slider on mobile and tablet
+  const objectivesSlider = document.querySelector('.objectives-slider');
+  if (objectivesSlider) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    let isDragging = false;
+
+    objectivesSlider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+      isDragging = true;
+    }, { passive: true });
+
+    objectivesSlider.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    objectivesSlider.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+      const minSwipeDistance = 50;
+      
+      // Only trigger swipe if horizontal movement is greater than vertical
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+        if (deltaX > 0) {
+          // Swipe right - go to previous slide
+          window.moveSlider(-1);
+        } else {
+          // Swipe left - go to next slide
+          window.moveSlider(1);
+        }
+      }
+    }, { passive: true });
+  }
   
   // Team Members Toggle Functionality
   window.toggleAdditionalTeamMembers = function() {
@@ -469,35 +511,77 @@ document.addEventListener('DOMContentLoaded', () => {
       updateAwardsPosition();
     });
 
-    // Auto-play functionality
-    awardsAutoPlay = setInterval(() => {
-      const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
-      if (currentAwardSlide < maxSlides - 1) {
-        window.moveAwardsSlider(1);
-      } else {
-        currentAwardSlide = 0;
-        updateAwardsPosition();
-      }
-    }, 6000);
+    // Auto-play functionality - DISABLED
+    // awardsAutoPlay = setInterval(() => {
+    //   const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
+    //   if (currentAwardSlide < maxSlides - 1) {
+    //     window.moveAwardsSlider(1);
+    //   } else {
+    //     currentAwardSlide = 0;
+    //     updateAwardsPosition();
+    //   }
+    // }, 6000);
 
-    // Pause auto-play on hover
-    const awardsSection = document.querySelector('.awards-section');
-    if (awardsSection) {
-      awardsSection.addEventListener('mouseenter', () => {
-        clearInterval(awardsAutoPlay);
-      });
+    // Pause auto-play on hover - DISABLED
+    // const awardsSection = document.querySelector('.awards-section');
+    // if (awardsSection) {
+    //   awardsSection.addEventListener('mouseenter', () => {
+    //     clearInterval(awardsAutoPlay);
+    //   });
       
-      awardsSection.addEventListener('mouseleave', () => {
-        awardsAutoPlay = setInterval(() => {
-          const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
-          if (currentAwardSlide < maxSlides - 1) {
-            window.moveAwardsSlider(1);
+    //   awardsSection.addEventListener('mouseleave', () => {
+    //     awardsAutoPlay = setInterval(() => {
+    //       const maxSlides = Math.ceil(totalAwards / Math.floor(awardsPerView));
+    //       if (currentAwardSlide < maxSlides - 1) {
+    //         window.moveAwardsSlider(1);
+    //       } else {
+    //         currentAwardSlide = 0;
+    //         updateAwardsPosition();
+    //       }
+    //     }, 6000);
+    //   });
+    // }
+
+    // Touch/Swipe functionality for mobile and tablet
+    const awardsSlider = document.querySelector('.awards-slider');
+    if (awardsSlider) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+      let isDragging = false;
+
+      awardsSlider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        isDragging = true;
+      }, { passive: true });
+
+      awardsSlider.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      awardsSlider.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        const minSwipeDistance = 50;
+        
+        // Only trigger swipe if horizontal movement is greater than vertical
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+          if (deltaX > 0) {
+            // Swipe right - go to previous slide
+            window.moveAwardsSlider(-1);
           } else {
-            currentAwardSlide = 0;
-            updateAwardsPosition();
+            // Swipe left - go to next slide
+            window.moveAwardsSlider(1);
           }
-        }, 6000);
-      });
+        }
+      }, { passive: true });
     }
   }
 });
