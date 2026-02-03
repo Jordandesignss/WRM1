@@ -211,6 +211,20 @@ html{
 .programs {
   padding: 4rem 2rem;
   background-color: #4C2D48;
+  position: relative;
+}
+
+.programs.rainbow-overlay::before {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.12) 0%,
+    rgba(255, 165, 0, 0.12) 16.66%,
+    rgba(255, 255, 0, 0.12) 33.33%,
+    rgba(0, 128, 0, 0.12) 50%,
+    rgba(0, 0, 255, 0.12) 66.66%,
+    rgba(75, 0, 130, 0.12) 83.33%,
+    rgba(238, 130, 238, 0.12) 100%
+  );
 }
 
 .programs-grid {
@@ -720,6 +734,20 @@ margin-top: -10px;
   padding: 6rem 2rem;
   background-color: #4C2D48;
   color: white;
+  position: relative;
+}
+
+.volunteer-testimonials.rainbow-overlay::before {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.12) 0%,
+    rgba(255, 165, 0, 0.12) 16.66%,
+    rgba(255, 255, 0, 0.12) 33.33%,
+    rgba(0, 128, 0, 0.12) 50%,
+    rgba(0, 0, 255, 0.12) 66.66%,
+    rgba(75, 0, 130, 0.12) 83.33%,
+    rgba(238, 130, 238, 0.12) 100%
+  );
 }
 
 .testimonials-intro {
@@ -862,11 +890,87 @@ margin-top: 1.5rem;
 
 
 
+/* Rainbow Overlay Styles */
+.rainbow-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.1) 0%,
+    rgba(255, 165, 0, 0.1) 16.66%,
+    rgba(255, 255, 0, 0.1) 33.33%,
+    rgba(0, 128, 0, 0.1) 50%,
+    rgba(0, 0, 255, 0.1) 66.66%,
+    rgba(75, 0, 130, 0.1) 83.33%,
+    rgba(238, 130, 238, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rainbow-overlay {
+  position: relative;
+}
+
+.rainbow-overlay > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Rainbow Overlay Styles */
+.rainbow-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 0, 0, 0.1) 0%,
+    rgba(255, 165, 0, 0.1) 16.66%,
+    rgba(255, 255, 0, 0.1) 33.33%,
+    rgba(0, 128, 0, 0.1) 50%,
+    rgba(0, 0, 255, 0.1) 66.66%,
+    rgba(75, 0, 130, 0.1) 83.33%,
+    rgba(238, 130, 238, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rainbow-overlay {
+  position: relative;
+}
+
+.rainbow-overlay > * {
+  position: relative;
+  z-index: 2;
+}
+
 /* Contact Section */
 .contact {
   padding: 4rem 2rem;
   background-color: #4C2D48; /* purple background to match screenshot */
   color: white;
+  position: relative;
+}
+
+.contact.rainbow-overlay::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 0, 0.15) 0%,
+    rgba(255, 165, 0, 0.15) 16.66%,
+    rgba(255, 255, 0, 0.15) 33.33%,
+    rgba(0, 128, 0, 0.15) 50%,
+    rgba(0, 0, 255, 0.15) 66.66%,
+    rgba(75, 0, 130, 0.15) 83.33%,
+    rgba(238, 130, 238, 0.15) 100%
+  );
 }
 
 /* About Us Section */
