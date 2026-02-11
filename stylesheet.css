@@ -1,8 +1,39 @@
-/* General Styles */
+/* ========================================
+   WRMP Stylesheet
+   Website: Wildlife Rescue & Migration Protection
+   ========================================
+   
+   TABLE OF CONTENTS:
+   
+   1. CSS Reset & Base Styles
+   2. Navigation
+   3. Hero Sections
+   4. Programs Section
+   5. Donations Section
+   6. Volunteer Page
+   7. Contact Section
+   8. About Us Page
+   9. Awards Section
+   10. Footer
+   11. Shared Components & Utilities
+   12. Animations
+   13. Media Queries
+   
+   ======================================== */
+
+
+/* ========================================
+   1. CSS RESET & BASE STYLES
+   ======================================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
 }
 
 body {
@@ -10,12 +41,13 @@ body {
   line-height: 1.6;
   color: #333;
   overflow-x: hidden;
-  padding-top: 80px; /* Account for fixed navbar */
+  padding-top: 80px;
 }
-html{
-  overflow-x: hidden;
-}
-/* Navigation Bar */
+
+
+/* ========================================
+   2. NAVIGATION
+   ======================================== */
 .navbar {
   background-color: #4C2D48;
   position: fixed;
@@ -78,7 +110,10 @@ html{
   color: #8f5487;
 }
 
-/* Hero Section */
+
+/* ========================================
+   3. HERO SECTIONS
+   ======================================== */
 .hero {
   position: relative;
   padding: 100px 2rem;
@@ -195,9 +230,6 @@ html{
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-
-
-/* Section Titles */
 .section-title {
   text-align: center;
   font-size: 2.5rem;
@@ -207,7 +239,10 @@ html{
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.274);
 }
 
-/* Programs Section */
+
+/* ========================================
+   4. PROGRAMS SECTION
+   ======================================== */
 .programs {
   padding: 4rem 2rem;
   background-color: #4C2D48;
@@ -422,7 +457,9 @@ html{
 }
 
 
-/* dontation Section */
+/* ========================================
+   5. DONATIONS SECTION
+   ======================================== */
 
 .donations {
   padding: 4rem 2rem;
@@ -537,11 +574,6 @@ html{
   margin-bottom: 10px;
 }
 
-.highlight {
-  font-weight: 600; /* semi-bold */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.37); /* subtle drop shadow */
-}
-
 
 .donation-box-bottom {
   display: flex;
@@ -604,7 +636,9 @@ margin-top: -10px;
 
 
 
-/* VOLUNTEER PAGE STYLES */
+/* ========================================
+   6. VOLUNTEER PAGE
+   ======================================== */
 
 /* Volunteer Hero Section */
 .volunteer-hero {
@@ -648,13 +682,15 @@ margin-top: -10px;
 .volunteer-main-title {
   font-size: 3.5rem;
   font-weight: bold;
-  
+  white-space: nowrap;
+  text-align: center;
+  margin-left: -90px;
   color: #ffffff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .volunteer-subtitle {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin-bottom: 2rem;
   opacity: 0.95;
   font-weight: 300;
@@ -690,10 +726,11 @@ margin-top: -10px;
 }
 
 .cta-btn.primary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.8);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(76, 45, 72, 0.4);
+  box-shadow: 0 8px 25px rgba(76, 45, 72, 0.6);
+  color: white;
 }
 
 .cta-btn.secondary {
@@ -703,10 +740,10 @@ margin-top: -10px;
 }
 
 .cta-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.8);
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
   color: white;
 }
 
@@ -889,8 +926,15 @@ margin-top: 1.5rem;
 }
 
 
+/* ========================================
+   11. SHARED COMPONENTS & UTILITIES
+   ======================================== */
 
-/* Rainbow Overlay Styles */
+/* Rainbow Overlay Utility */
+.rainbow-overlay {
+  position: relative;
+}
+
 .rainbow-overlay::before {
   content: '';
   position: absolute;
@@ -912,47 +956,22 @@ margin-top: 1.5rem;
   z-index: 1;
 }
 
-.rainbow-overlay {
-  position: relative;
-}
-
 .rainbow-overlay > * {
   position: relative;
   z-index: 2;
 }
 
-/* Rainbow Overlay Styles */
-.rainbow-overlay::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    45deg,
-    rgba(255, 0, 0, 0.1) 0%,
-    rgba(255, 165, 0, 0.1) 16.66%,
-    rgba(255, 255, 0, 0.1) 33.33%,
-    rgba(0, 128, 0, 0.1) 50%,
-    rgba(0, 0, 255, 0.1) 66.66%,
-    rgba(75, 0, 130, 0.1) 83.33%,
-    rgba(238, 130, 238, 0.1) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
+/* Text Utilities */
+.highlight {
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.37);
 }
 
-.rainbow-overlay {
-  position: relative;
-}
 
-.rainbow-overlay > * {
-  position: relative;
-  z-index: 2;
-}
+/* ========================================
+   7. CONTACT SECTION
+   ======================================== */
 
-/* Contact Section */
 .contact {
   padding: 4rem 2rem;
   background-color: #4C2D48; /* purple background to match screenshot */
@@ -973,7 +992,10 @@ margin-top: 1.5rem;
   );
 }
 
-/* About Us Section */
+/* ========================================
+   8. ABOUT US PAGE
+   ======================================== */
+
 .about-us {
   padding: 4rem 2rem;
   background-image: url("images/AB1.jpg");
@@ -1022,6 +1044,7 @@ margin-top: 1.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 3rem;
+  align-items: start;
 }
 
 .team-member {
@@ -1031,6 +1054,8 @@ margin-top: 1.5rem;
   display: flex;
   gap: 2rem;
   align-items: flex-start;
+  min-height: 250px;
+  height: auto;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1575,6 +1600,7 @@ margin-top: 1.5rem;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: start;
+  justify-items: center;
 }
 .contact-card {
   background: rgba(255, 255, 255, 0.15);
@@ -1585,7 +1611,9 @@ margin-top: 1.5rem;
   padding: 2rem;
   box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3), 
               0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  min-height: 400px;
+  height: 500px;
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
@@ -1670,7 +1698,10 @@ p.icon-line a:hover {
 
 
 
-/* Footer tweaks to match screenshot */
+/* ========================================
+   10. FOOTER
+   ======================================== */
+
 .footer {
   background-color: #4C2D48;
   padding: 0.5rem;
@@ -1693,7 +1724,10 @@ p.icon-line a:hover {
 
 
 
-/* Responsive Design */
+/* ========================================
+   13. MEDIA QUERIES & RESPONSIVE DESIGN
+   ======================================== */
+
 /* Mobile Menu Styles */
 .mobile-menu-btn {
   display: none;
@@ -2676,6 +2710,10 @@ margin-top: -10px;
 
 }
 
+/* ========================================
+   12. ANIMATIONS
+   ======================================== */
+
 /* Scroll Animation Styles */
 .animate-on-scroll {
   opacity: 0;
@@ -2737,7 +2775,10 @@ margin-top: -10px;
 .animate-on-scroll:nth-child(4) { transition-delay: 0.4s; }
 .animate-on-scroll:nth-child(5) { transition-delay: 0.5s; }
 
-/* Awards Section - Modern Slider Design */
+/* ========================================
+   9. AWARDS SECTION
+   ======================================== */
+
 .awards-section {
   background: url('images/V1.jpg') center/cover;
   padding: 60px 0;
