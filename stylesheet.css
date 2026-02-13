@@ -1044,7 +1044,7 @@ margin-top: 1.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   gap: 3rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .team-member {
@@ -1055,7 +1055,7 @@ margin-top: 1.5rem;
   gap: 2rem;
   align-items: flex-start;
   min-height: 250px;
-  height: auto;
+  height: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1215,6 +1215,13 @@ margin-top: 1.5rem;
   font-size: 0.9rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.founded-badge:hover {
+  background: #8B5A88;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .organization-name {
