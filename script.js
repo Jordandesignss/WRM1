@@ -186,8 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Scroll animations with Intersection Observer
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
   };
 
   const animateOnScroll = new IntersectionObserver((entries) => {
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, observerOptions);
 
   // Observe all elements with animation classes
-  document.querySelectorAll('.animate-on-scroll').forEach(element => {
+  document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right').forEach(element => {
     animateOnScroll.observe(element);
   });
 
@@ -584,5 +584,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { passive: true });
     }
   }
+
+  // ── Auto-rotating Quote Carousel ────────────────────────────────
+  const quoteSlides = document.querySelectorAll('.quote-slide');
+  if (quoteSlides.length > 1) {
+    let currentQuote = 0;
+
+    function cycleQuote() {
+      const prev = currentQuote;
+      currentQuote = (currentQuote + 1) % quoteSlides.length;
+
+      quoteSlides[prev].classList.add('fade-out');
+      quoteSlides[prev].classList.remove('active');
+
+      setTimeout(() => {
+        quoteSlides[prev].classList.remove('fade-out');
+        quoteSlides[prev].style.display = 'none';
+        quoteSlides[currentQuote].style.display = 'flex';
+        quoteSlides[currentQuote].getBoundingClientRect(); // force reflow
+        quoteSlides[currentQuote].classList.add('active');
+      }, 400);
+    }
+
+    setInterval(cycleQuote, 5000);
+  }
+  // ────────────────────────────────────────────────────────────────
 });
 
