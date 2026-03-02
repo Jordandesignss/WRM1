@@ -244,7 +244,7 @@ body {
 }
 
 .view-more-btn {
-  width: 201px;
+  width: 210px;
 }
 
 .section-title {
@@ -2160,12 +2160,30 @@ p.icon-line a:hover {
 
 
   /* Volunteer Page Responsive */
+  .volunteer-hero::before {
+    filter: blur(3px);
+    margin: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+  }
+
   .volunteer-main-title {
     font-size: 2.5rem;
+    white-space: normal;
+    margin-left: 0;
+  }
+
+  .volunteer-tagline {
+    font-size: 1.1rem;
   }
 
   .volunteer-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
+  }
+
+  .hero-overlay {
+    max-width: 100%;
+    padding: 0 1rem;
   }
 
   .cta-btn {
@@ -2243,11 +2261,14 @@ p.icon-line a:hover {
   }
 
   .more-btn {
-    width: 40%;
+    width: auto;
+    white-space: nowrap;
   }
 
   .more-btn2 {
     margin-top: 10px;
+    width: auto;
+    white-space: nowrap;
   }
 
   /* Use two columns on tablets (landscape/large portrait) */
@@ -2301,6 +2322,11 @@ p.icon-line a:hover {
     gap: 1.5rem;
   }
 
+  .member-left-section {
+    align-items: center;
+    width: 100%;
+  }
+
   /* Awards Section Responsive - Tablet */
   .awards-timeline {
     gap: 1.5rem;
@@ -2345,6 +2371,7 @@ p.icon-line a:hover {
     align-self: center;
     width: 120px;
     height: 120px;
+    margin: 0 auto;
   }
 
   /* Make the back side content scrollable on smaller screens */
@@ -2491,12 +2518,31 @@ p.icon-line a:hover {
   }
 
   /* Volunteer Page Mobile */
+  .volunteer-hero::before {
+    filter: blur(4px);
+    margin: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+  }
+
   .volunteer-main-title {
-    font-size: 2rem;
+    font-size: 1.7rem;
+    white-space: normal;
+    margin-left: 0;
+  }
+
+  .volunteer-tagline {
+    font-size: 1rem;
   }
 
   .volunteer-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-overlay {
+    max-width: 100%;
+    padding: 0 0.5rem;
   }
 
   .volunteer-container {
@@ -2508,10 +2554,18 @@ p.icon-line a:hover {
     padding: 2rem 0;
   }
 
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
   .cta-btn {
     padding: 0.7rem 1.2rem;
     font-size: 0.95rem;
     margin: 0;
+    width: 100%;
+    text-align: center;
   }
 
   .volunteer-opportunities,
@@ -2605,7 +2659,8 @@ p.icon-line a:hover {
   }
 
   .more-btn, .more-btn2 {
-    width: 48%;
+    width: auto;
+    white-space: nowrap;
   }
 
   .section-title {
@@ -2640,9 +2695,15 @@ p.icon-line a:hover {
     padding: 1.5rem;
   }
 
+  .member-left-section {
+    align-items: center;
+    width: 100%;
+  }
+
   .member-photo {
     width: 100px;
     height: 100px;
+    margin: 0 auto;
   }
 
   .member-name {
