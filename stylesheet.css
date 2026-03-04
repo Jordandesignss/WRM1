@@ -280,11 +280,140 @@ body {
 }
 
 .programs-grid {
-  max-width: 900px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  box-sizing: border-box;
+}
+
+.program-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  width: fit-content;
+  margin: 0 auto;
+  box-sizing: border-box;
+  min-width: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.program-extra {
+  width: 434px;
+  flex-shrink: 0;
+  align-self: stretch;
+  min-height: 560px;
+  position: relative;
+  perspective: 1000px;
+}
+
+/* Override .flip-container fixed-width when used as right panel */
+.program-extra.flip-container {
+  width: 434px;
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.program-extra .flipper {
+  height: 100%;
+  min-height: 560px;
+}
+
+.program-extra .front,
+.program-extra .back {
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2rem;
+  background: #ffffff;
+  box-shadow: none;
+  border: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.program-extra .front h3,
+.program-extra .back h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #0f0f0f;
+  text-align: left;
+  width: 100%;
+  margin-left: -0.2rem;
+  margin-top: 10px;
+}
+
+.program-extra .front p,
+.program-extra .back p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  color: #333;
+  text-align: left;
+  width: 100%;
+}
+
+/* By default, back face is not interactive; front face is */
+.program-extra .back {
+  pointer-events: none;
+}
+
+/* When flipped, front face hidden - disable its pointer events, enable back */
+.program-extra.flip-container.flipped .front {
+  pointer-events: none;
+}
+
+.program-extra.flip-container.flipped .back {
+  pointer-events: auto;
+}
+
+/* Push buttons to bottom of each face */
+.program-extra .front .more-btn,
+.program-extra .back .back-btn {
+  margin-top: auto;
+  margin-left: 0;
+  width: auto;
+  height: auto;
+  align-self: flex-start;
+}
+
+/* Static left image card */
+.program-row .program-card {
+  width: 434px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: 560px;
+  justify-content: flex-start;
+}
+
+.program-row .program-card img {
+  width: 370px;
+  height: 400px;
+  object-fit: cover;
+  margin-top: 2rem;
+  display: block;
+  flex-shrink: 0;
+}
+
+.program-row .program-card h3 {
+  font-size: 1.1rem;
+  margin-top: 2.9rem;
+  text-align: center;
+  width: 100%;
+  color: #0f0f0f;
+  margin-left: 0;
 }
 
 /* Flip Container */
@@ -292,7 +421,7 @@ body {
   perspective: 1000px;
   cursor: pointer;
   width: 434px; /* fixed container width requested */
-  margin: 0 auto; /* center each card in its grid cell */
+  flex-shrink: 0;
 }
 
 .flipper {
@@ -301,10 +430,14 @@ body {
   height: 560px; /* requested container height */
   transition: transform 0.6s;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .flip-container.flipped .flipper {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(0);
+  -webkit-transform: rotateY(180deg) translateZ(0);
 }
 
 .front, .back {
@@ -312,6 +445,7 @@ body {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -319,6 +453,8 @@ body {
   padding: 1rem;
   border: 2px solid white;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .front {
@@ -329,11 +465,13 @@ body {
 .back {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(0);
+  -webkit-transform: rotateY(180deg) translateZ(0);
   text-align: left;
   justify-content: flex-start;
   align-items: flex-start;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 1rem 1.1rem;
 }
 
@@ -708,12 +846,17 @@ margin-top: -10px;
 .volunteer-tagline {
   font-size: 1.3rem;
   font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 600;
+  font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
   letter-spacing: 0.5px;
   margin-bottom: 0.75rem;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
+
+
+ 
+
+
 
 .volunteer-subtitle {
   font-size: 1.2rem;
@@ -781,7 +924,6 @@ margin-top: -10px;
 .section-title-volunteer {
   text-align: center;
   font-size: 2.8rem;
-  margin-bottom: 3rem;
   font-weight: 700;
   color: #4C2D48;
 }
@@ -872,9 +1014,8 @@ margin-top: -10px;
 }
 
 .pull-quote-text {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-style: italic;
-  font-family: Georgia, 'Times New Roman', serif;
   line-height: 1.6;
   color: white;
   margin: 0 0 0.5rem 0;
@@ -1283,6 +1424,7 @@ margin-top: 1.5rem;
   overflow: hidden;
   border: 4px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-top: 0.5rem;
 }
 
 .member-photo img {
@@ -1299,7 +1441,7 @@ margin-top: 1.5rem;
 .member-name {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
@@ -1307,9 +1449,10 @@ margin-top: 1.5rem;
 .member-title {
   font-size: 1.1rem;
   color: #490637;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: 600;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  margin-top: -0.40rem;
 }
 
 .member-description {
@@ -1736,7 +1879,7 @@ margin-top: 1.5rem;
 
 .programs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -1751,8 +1894,8 @@ margin-top: 1.5rem;
 }
 
 .program-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+  transform: none;
+  box-shadow: none;
 }
 
 .program-header {
@@ -2171,6 +2314,7 @@ p.icon-line a:hover {
     font-size: 2.5rem;
     white-space: normal;
     margin-left: 0;
+    
   }
 
   .volunteer-tagline {
@@ -2224,30 +2368,66 @@ p.icon-line a:hover {
     font-size: 1.1rem;
   }
 
-  /* Programs responsive adjustments */
+  /* Programs responsive adjustments – stack vertically on all mobile/tablet */
   .programs-grid {
-    grid-template-columns: 1fr;
     gap: 2rem;
     padding: 0 1rem;
-    max-width: 720px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Stack image card above flip panel */
+  .program-row {
+    flex-direction: column;
+    width: 100%;
+    box-shadow: none;
+    align-items: stretch;
+    margin: 0;
+    margin-left: -0.8rem;
+  }
+
+  .program-row .program-card {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    
+  }
+
+  .program-row .program-card img {
+    width: 100%;
+    max-width: 100%;
+    height: 240px;
+    margin-top: 0.5rem;
+    object-fit: cover;
+  }
+
+  .program-row .program-card h3 {
+    font-size: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .program-extra,
+  .program-extra.flip-container {
+    width: 100%;
+    min-height: 460px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-left: 16px;
+  }
+
+  .program-extra .flipper {
+    min-height: 460px;
+    height: 460px;
   }
 
   .flip-container {
     width: 100%;
-    max-width: 520px;
-    margin: 0 auto;
   }
 
   .flipper {
-    height: 520px; /* reduced height for tablets */
-  }
-
-  .front img {
-    width: 100%;
-    max-width: 480px;
-    height: 320px;
-    object-fit: cover;
-    margin-top: 8px;
+    height: 460px;
   }
 
   .front h3 {
@@ -2447,6 +2627,65 @@ p.icon-line a:hover {
     font-size: 2.5rem;
   }
 
+  /* FIX: Remove translateY from programme rows on mobile.
+     translateY on a parent + preserve-3d on a child = GPU compositing
+     at fractional pixel positions = blurry text on mobile devices.
+     Switch to opacity-only fade so preserve-3d composites cleanly. */
+  .program-row.animate-on-scroll {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+  }
+  .program-row.animate-on-scroll.animate-in {
+    transform: none;
+    opacity: 1;
+  }
+
+  /* MOBILE FLIP: Replace 3D rotateY with a simple opacity crossfade.
+     preserve-3d + rotateY forces GPU sub-pixel compositing = blur.
+     Flat opacity fade has zero compositing overhead = crisp text. */
+  .flipper {
+    transform-style: flat !important;
+    -webkit-transform-style: flat !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    height: auto;
+    min-height: 460px;
+  }
+
+  .front,
+  .back {
+    transform: none !important;
+    -webkit-transform: none !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+    transition: opacity 0.4s ease;
+  }
+
+  /* Back face hidden by default */
+  .program-extra .back {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Front face hidden when flipped */
+  .program-extra.flip-container.flipped .front {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Back face shown when flipped */
+  .program-extra.flip-container.flipped .back {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Neutralise the rotateY on the flipper itself */
+  .flip-container.flipped .flipper {
+    transform: none !important;
+    -webkit-transform: none !important;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -2634,23 +2873,32 @@ p.icon-line a:hover {
     font-size: 0.9rem;
   }
 
-  /* Programs mobile tweaks */
+  /* Programs mobile tweaks for 414px screens – inherits stacking from 768px */
   .programs-grid {
-    gap: 1.25rem;
-    padding: 0 0.75rem;
+    gap: 1.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .program-row .program-card img {
+    height: 200px;
+  }
+
+  .program-extra,
+  .program-extra.flip-container {
+    min-height: 430px;
+  }
+
+  .program-extra .flipper {
+    min-height: 430px;
+    height: 430px;
   }
 
   .flip-container {
     width: 100%;
-    max-width: 360px;
   }
 
   .flipper {
     height: 430px;
-  }
-
-  .front img {
-    height: 260px;
   }
 
   .front h3 {
@@ -2976,6 +3224,10 @@ margin-top: -10px;
   margin: 0;
   width: 1px;
 }
+
+
+
+
 
 
 }

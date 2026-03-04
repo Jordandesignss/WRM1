@@ -133,8 +133,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Allow tapping/clicking the whole card to toggle flip
-  document.querySelectorAll('.flip-container').forEach(container => {
+  // Fix post-flip GPU blur on mobile: force repaint after the flip transition ends
+  if (window.innerWidth <= 768) {
+    document.querySelectorAll('.flipper').forEach(flipper => {
+      flipper.addEventListener('transitionend', (e) => {
+        if (e.propertyName === 'transform') {
+          // Briefly toggle will-change to force the browser to refresh the compositing layer
+          flipper.style.willChange = 'auto';
+          void flipper.offsetHeight; // force synchronous reflow
+          flipper.style.willChange = 'transform';
+        }
+      });
+    });
+  }
+
+  // Allow tapping/clicking the whole card to toggle flip (exclude right-panel extras)
+  document.querySelectorAll('.flip-container:not(.program-extra)').forEach(container => {
     container.addEventListener('click', () => {
       container.classList.toggle('flipped');
     });
