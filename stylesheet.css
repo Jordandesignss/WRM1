@@ -757,6 +757,17 @@ font-size: 13px;
 margin-top: -10px;
 }
 
+/* GivenGain link */
+.givengain-link {
+  color: #a1058c;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+.givengain-link:hover {
+  color: #56204e;
+}
+
 /* Make links inside the donation paragraph purple and add hover state */
 .donation-link a {
   color: #988f8f;
@@ -2943,21 +2954,36 @@ p.icon-line a:hover {
     margin-bottom: 2rem;
   }
 
-  .donation-box {
-    width: 100%;
-    padding: 1.5rem;
-  }
-
-  .donation-box h3 {
-    font-size: 1.3rem;
-  }
-
   .donations {
     padding: 3rem 1rem;
   }
 
   .donations-container {
-    margin-left: auto;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .donations-column {
+    width: 100%;
+  }
+
+  .donation-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.25rem 1rem;
+  }
+
+  .donation-box h3 {
+    font-size: 1.2rem;
+  }
+
+  .donation-text {
+    font-size: 1rem;
+  }
+
+  .givengain-link {
+    word-break: break-all;
   }
 
   .donation-badge {
@@ -3723,6 +3749,40 @@ margin-top: -10px;
   .testimonial-card blockquote {
     font-size: 0.88rem;
     padding-left: 0.75rem;
+  }
+
+  /* Donations – 375px */
+  .donations {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .donations-container {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .donations-column {
+    width: 100%;
+  }
+
+  .donation-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem 0.875rem;
+  }
+
+  .donation-box h3 {
+    font-size: 1.1rem;
+  }
+
+  .donation-text {
+    font-size: 0.95rem;
+  }
+
+  .givengain-link {
+    word-break: break-all;
+    font-size: 0.9rem;
   }
 }
 
