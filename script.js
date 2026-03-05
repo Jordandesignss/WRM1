@@ -166,7 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         const target = document.querySelector(targetId);
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const navbarHeight = document.querySelector('.navbar').offsetHeight;
+          const targetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+          window.scrollTo({ top: targetTop, behavior: 'smooth' });
         }
       }
     });

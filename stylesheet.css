@@ -117,6 +117,7 @@ body {
   text-decoration: none;
   transition: color 0.3s ease;
   font-weight: 500;
+  user-select: none;
 }
 
 .nav-link:hover {
@@ -844,13 +845,14 @@ margin-top: -10px;
 }
 
 .volunteer-tagline {
-  font-size: 1.3rem;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.5rem;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.95);
   letter-spacing: 0.5px;
   margin-bottom: 0.75rem;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
 }
 
 
@@ -1271,12 +1273,13 @@ margin-top: 1.5rem;
 }
 
 .intro-subheading {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: white;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Inter', sans-serif;
   letter-spacing: 0.5px;
   margin-bottom: 0.75rem;
+  margin-top: -2.2rem;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -1419,8 +1422,7 @@ margin-top: 1.5rem;
 
 .member-photo {
   flex-shrink: 0;
-  width: 150px;
-  height: 150px;
+  width: 160px;
   overflow: hidden;
   border: 4px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -1429,9 +1431,9 @@ margin-top: 1.5rem;
 
 .member-photo img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background-color: #ccc;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .member-info {
@@ -1570,6 +1572,13 @@ margin-top: 1.5rem;
   font-size: 0.9rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.founded-badge:hover {
+  background: #8f5487;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.5);
 }
 
 .organization-name {
@@ -2549,8 +2558,7 @@ p.icon-line a:hover {
 
   .member-photo {
     align-self: center;
-    width: 120px;
-    height: 120px;
+    width: 130px;
     margin: 0 auto;
   }
 
@@ -2765,13 +2773,16 @@ p.icon-line a:hover {
   }
 
   .volunteer-main-title {
-    font-size: 1.7rem;
-    white-space: normal;
+    font-size: clamp(1.4rem, 5vw, 1.7rem);
+    white-space: nowrap;
     margin-left: 0;
   }
 
   .volunteer-tagline {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    white-space: normal;
+    letter-spacing: 0;
+     
   }
 
   .volunteer-subtitle {
@@ -2811,6 +2822,17 @@ p.icon-line a:hover {
   .volunteer-testimonials,
   .volunteer-cta {
     padding: 4rem 1rem;
+    
+  }
+
+  .section-title-volunteer {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+  }
+
+  .testimonials-intro {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
   }
 
   .testimonials-grid {
@@ -2819,6 +2841,7 @@ p.icon-line a:hover {
 
   .testimonial-card {
     padding: 1.5rem;
+    
   }
 
   .testimonial-header {
@@ -2841,6 +2864,10 @@ p.icon-line a:hover {
   .testimonial-card blockquote {
     font-size: 0.95rem;
     padding-left: 1rem;
+  }
+
+  .pull-quote-text {
+    font-size: 0.95rem;
   }
 
   .cta-content h2 {
@@ -2949,8 +2976,7 @@ p.icon-line a:hover {
   }
 
   .member-photo {
-    width: 100px;
-    height: 100px;
+    width: 110px;
     margin: 0 auto;
   }
 
@@ -3602,6 +3628,101 @@ margin-top: -10px;
   
   .awards-header .section-title {
     font-size: 2rem;
+  }
+}
+
+/* ========================================
+   SMALL MOBILE (375px x 667px)
+   ======================================== */
+@media (max-width: 375px) {
+
+  /* Volunteer Hero */
+  .volunteer-hero {
+    min-height: auto;
+    padding: 3rem 0 2rem 0;
+    align-items: center;
+  }
+
+  .section-title-volunteer {
+    font-size: 1.4rem;
+  }
+
+  .testimonials-intro {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .pull-quote-text {
+    font-size: 0.95rem;
+  }
+
+  .volunteer-container {
+    padding: 0 0.75rem;
+  }
+
+  .hero-overlay {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .volunteer-main-title {
+    font-size: clamp(1rem, 5vw, 1.4rem);
+    white-space: nowrap;
+    margin-left: 0;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  .volunteer-tagline {
+    font-size: 0.9rem;
+    white-space: normal;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0;
+  }
+
+  .volunteer-subtitle {
+    font-size: 0.88rem;
+    letter-spacing: 0;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .cta-btn {
+    font-size: 0.9rem;
+    padding: 0.65rem 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Testimonials */
+  .testimonial-card {
+    padding: 1rem;
+  }
+
+  .testimonial-photo {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+  }
+
+  .testimonial-info h3 {
+    font-size: 1rem;
+  }
+
+  .testimonial-info .role {
+    font-size: 0.8rem;
+  }
+
+  .testimonial-card blockquote {
+    font-size: 0.88rem;
+    padding-left: 0.75rem;
   }
 }
 
